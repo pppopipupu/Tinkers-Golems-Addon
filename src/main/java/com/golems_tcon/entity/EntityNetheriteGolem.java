@@ -59,7 +59,7 @@ public class EntityNetheriteGolem extends GolemBase {
                 if (server == null) {
                     server = this.world.getMinecraftServer();
                 }
-                if (server.getTickCounter() % 20 == 0 && !world.isRemote && this.getAttackingEntity() != null) {
+                if (server.getTickCounter() % 20 == 0 && !world.isRemote && this.getAttackingEntity() != null&&!this.getAttackingEntity().isDead) {
                     EntityLargeFireball fireball = new EntityLargeFireball(world);
                     Vec3d shootVec = new Vec3d(-this.posX + this.getAttackingEntity().posX, -this.posY + this.getAttackingEntity().posY, -this.posZ + this.getAttackingEntity().posZ).normalize();
                     double accelX =
