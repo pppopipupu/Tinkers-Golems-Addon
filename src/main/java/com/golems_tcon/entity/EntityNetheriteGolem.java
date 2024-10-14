@@ -69,7 +69,7 @@ public class EntityNetheriteGolem extends GolemBase {
                     double accelZ =
                             shootVec.z * 2;
                     double posX = this.posX;
-                    double posY = this.posY + this.getEyeHeight();
+                    double posY = this.posY + this.getEyeHeight() - 1;
                     double posZ = this.posZ;
                     fireball.setLocationAndAngles(posX, posY, posZ, fireball.rotationYaw, fireball.rotationPitch);
                     fireball.setPosition(posX, posY, posZ);
