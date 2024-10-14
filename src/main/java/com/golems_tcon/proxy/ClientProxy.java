@@ -1,6 +1,8 @@
 package com.golems_tcon.proxy;
 
 import com.golems_tcon.entity.*;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ClientProxy extends CommonProxy {
 	
@@ -17,5 +19,8 @@ public class ClientProxy extends CommonProxy {
 		com.golems.proxies.ClientProxy.registerTextured(EntityPigironGolem.class);
 		com.golems.proxies.ClientProxy.registerTextured(EntitySearedGolem.class);
 		com.golems.proxies.ClientProxy.registerTextured(EntitySilkyGolem.class);
+		if(Loader.isModLoaded("futuremc")||Loader.isModLoaded("nb")) {
+			com.golems.proxies.ClientProxy.registerTextured(EntityNetheriteGolem.class);
+		}
 	}
 }

@@ -18,7 +18,7 @@ public class EntityArditeGolem extends GolemBase {
 		this.isImmuneToFire = true;
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.22D);
 		this.setLootTableLoc(TconGolems.MODID, "golem_ardite");
-		this.setCreativeReturn(TinkerCommons.blockArdite);
+	//	this.setCreativeReturn(TinkerCommons.blockArdite);
 	}
 
 	@Override

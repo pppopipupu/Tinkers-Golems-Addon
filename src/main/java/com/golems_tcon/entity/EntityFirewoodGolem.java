@@ -28,7 +28,7 @@ public class EntityFirewoodGolem extends GolemBase {
 		this.isImmuneToFire = true;
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.255D);
 		this.setLootTableLoc(TconGolems.MODID, "golem_firewood");
-		this.setCreativeReturn(TinkerCommons.firewood);
+		//this.setCreativeReturn(TinkerCommons.firewood);
 	}
 	
 	/** Attack by lighting on fire as well */

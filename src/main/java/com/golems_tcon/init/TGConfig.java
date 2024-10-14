@@ -2,17 +2,7 @@ package com.golems_tcon.init;
 
 import com.golems.util.GolemConfigSet;
 import com.golems.util.GolemLookup;
-import com.golems_tcon.entity.EntityArditeGolem;
-import com.golems_tcon.entity.EntityBrownstoneGolem;
-import com.golems_tcon.entity.EntityCGlassGolem;
-import com.golems_tcon.entity.EntityCobaltGolem;
-import com.golems_tcon.entity.EntityCongealedSlimeGolem;
-import com.golems_tcon.entity.EntityFirewoodGolem;
-import com.golems_tcon.entity.EntityKnightSlimeGolem;
-import com.golems_tcon.entity.EntityManyullynGolem;
-import com.golems_tcon.entity.EntityPigironGolem;
-import com.golems_tcon.entity.EntitySearedGolem;
-import com.golems_tcon.entity.EntitySilkyGolem;
+import com.golems_tcon.entity.*;
 
 import net.minecraftforge.common.config.Configuration;
 
@@ -47,6 +37,12 @@ public class TGConfig {
 				new GolemConfigSet(config, "Seared Golem", 48.0D, 6.0F));
 		GolemLookup.addConfig(EntitySilkyGolem.class,
 				new GolemConfigSet(config, "Silky Golem", 198.0D, 18.0F));
+		GolemLookup.addConfig(EntityNetheriteGolem.class,
+				new GolemConfigSet(config, "Netherite Golem", 2000.0D, 60.0F)
+						.addKey(EntityNetheriteGolem.ALLOW_SPECIAL,true,"The Golem can make Explosion")
+						.addKey(EntityNetheriteGolem.DESTORY_TERRAIN,true,"The Golem's Explosion can Destory Terrain"));
+
+
 		
 		config.save();
 	}
