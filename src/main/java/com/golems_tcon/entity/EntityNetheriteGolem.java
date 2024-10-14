@@ -29,7 +29,6 @@ public class EntityNetheriteGolem extends GolemBase {
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
         this.isImmuneToFire = true;
         this.setLootTableLoc(TconGolems.MODID, "golem_netherite");
-
     }
 
     @Override
@@ -55,43 +54,38 @@ public class EntityNetheriteGolem extends GolemBase {
     @Override
     public void onEntityUpdate() {
         super.onEntityUpdate();
-        if (this.getAttackingEntity() != null) {
-            if (server == null) {
-                server = this.world.getMinecraftServer();
+        if (getConfig(this).getBoolean(ALLOW_SPECIAL)) {
+            if (this.getAttackingEntity() != null) {
+                if (server == null) {
+                    server = this.world.getMinecraftServer();
+                }
+                if (server.getTickCounter() % 20 == 0 && !world.isRemote && this.getAttackingEntity() != null) {
+                    EntityLargeFireball fireball = new EntityLargeFireball(world);
+                    Vec3d shootVec = new Vec3d(-this.posX + this.getAttackingEntity().posX, -this.posY + this.getAttackingEntity().posY, -this.posZ + this.getAttackingEntity().posZ).normalize();
+                    double accelX =
+                            shootVec.x * 2;
+                    double accelY =
+                            shootVec.y * 2;
+                    double accelZ =
+                            shootVec.z * 2;
+                    double posX = this.posX;
+                    double posY = this.posY + this.getEyeHeight();
+                    double posZ = this.posZ;
+                    fireball.setLocationAndAngles(posX, posY, posZ, fireball.rotationYaw, fireball.rotationPitch);
+                    fireball.setPosition(posX, posY, posZ);
+                    double d0 = MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
+                    fireball.accelerationX = accelX / d0 * 0.1D;
+                    fireball.accelerationY = accelY / d0 * 0.1D;
+                    fireball.accelerationZ = accelZ / d0 * 0.1D;
+                    fireball.shootingEntity = this;
+                    fireball.explosionPower = 6;
+                    world.spawnEntity(fireball);
+                }
+                if (server.getTickCounter() % 60 == 0 && !world.isRemote && this.getAttackingEntity() != null) {
+                    this.heal(50);
+                }
             }
-            if (server.getTickCounter() % 20 == 0 && !world.isRemote && this.getAttackingEntity() != null) {
-                EntityLargeFireball fireball = new EntityLargeFireball(world);
-                Vec3d shootVec = new Vec3d(-this.posX + this.getAttackingEntity().posX, -this.posY + this.getAttackingEntity().posY, -this.posZ + this.getAttackingEntity().posZ).normalize();
-                double accelX =
-                        shootVec.x * 2;
-                double accelY =
-                        shootVec.y * 2;
-                double accelZ =
-                        shootVec.z * 2;
-                double posX = this.posX;
-                double posY = this.posY + this.getEyeHeight();
-                double posZ = this.posZ;
-                fireball.setLocationAndAngles(posX, posY, posZ, fireball.rotationYaw, fireball.rotationPitch);
-                fireball.setPosition(posX, posY, posZ);
-                double d0 = MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
-                fireball.accelerationX = accelX / d0 * 0.1D;
-                fireball.accelerationY = accelY / d0 * 0.1D;
-                fireball.accelerationZ = accelZ / d0 * 0.1D;
-                fireball.shootingEntity = this;
-                fireball.explosionPower = 6;
-                world.spawnEntity(fireball);
-
-
-            }
-            if (server.getTickCounter() % 60 == 0 && !world.isRemote && this.getAttackingEntity() != null) {
-                this.heal(50);
-
-
-            }
-
         }
-
-
     }
 
     @Override
@@ -113,11 +107,9 @@ public class EntityNetheriteGolem extends GolemBase {
                             //   entity.world.playSound(entity.posX, entity.posY, entity.posZ, SoundEvents.ENTITY_ENDERDRAGON_FLAP, SoundCategory.BLOCKS, 100.0F, 1.0F, false);
                         });
                     }
-
                 });
                 return true;
             }
-
         }
         return false;
     }
