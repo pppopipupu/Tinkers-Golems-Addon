@@ -23,6 +23,8 @@ public class EntityNetheriteGolem extends GolemBase {
     private MinecraftServer server;
     public static final String ALLOW_SPECIAL = "Allow Special: Generate Explosion";
     public static final String DESTORY_TERRAIN = "Allow Special: Destroy Terrain";
+    public static final String EXPLOSION_STRENGTH = "Explosion Strength";
+    public static final String FIREBALL_STRENGTH = "Fireball Strength";
 
     public EntityNetheriteGolem(World world) {
         super(world);
@@ -59,15 +61,15 @@ public class EntityNetheriteGolem extends GolemBase {
                 if (server == null) {
                     server = this.world.getMinecraftServer();
                 }
-                if (server.getTickCounter() % 20 == 0 && !world.isRemote && this.getAttackingEntity() != null&&!this.getAttackingEntity().isDead) {
+                if (server.getTickCounter() % 10 == 0 && !world.isRemote && this.getAttackingEntity() != null&&!this.getAttackingEntity().isDead) {
                     EntityLargeFireball fireball = new EntityLargeFireball(world);
                     Vec3d shootVec = new Vec3d(-this.posX + this.getAttackingEntity().posX, -this.posY + this.getAttackingEntity().posY, -this.posZ + this.getAttackingEntity().posZ).normalize();
                     double accelX =
-                            shootVec.x * 2;
+                            shootVec.x * 100;
                     double accelY =
-                            shootVec.y * 2;
+                            shootVec.y * 100;
                     double accelZ =
-                            shootVec.z * 2;
+                            shootVec.z * 100;
                     double posX = this.posX;
                     double posY = this.posY + this.getEyeHeight() - 1;
                     double posZ = this.posZ;
@@ -78,11 +80,11 @@ public class EntityNetheriteGolem extends GolemBase {
                     fireball.accelerationY = accelY / d0 * 0.1D;
                     fireball.accelerationZ = accelZ / d0 * 0.1D;
                     fireball.shootingEntity = this;
-                    fireball.explosionPower = 6;
+                    fireball.explosionPower = getConfig(this).getInt(FIREBALL_STRENGTH);
                     world.spawnEntity(fireball);
                 }
                 if (server.getTickCounter() % 60 == 0 && !world.isRemote && this.getAttackingEntity() != null) {
-                    this.heal(50);
+                    this.heal(20);
                 }
             }
         }
@@ -102,8 +104,8 @@ public class EntityNetheriteGolem extends GolemBase {
                         }
                         int finalI = i;
                         server.addScheduledTask(() -> {
-                            entity.world.createExplosion((Entity) null, entity.posX, entity.posY + (finalI * 3) - 5, entity.posZ, 4.0F, getConfig(this).getBoolean(DESTORY_TERRAIN));
-                            entity.addVelocity(0D, 1D, 0D);
+                            entity.world.createExplosion((Entity) null, entity.posX, entity.posY + (finalI * 3) - 5, entity.posZ, getConfig(this).getFloat(EXPLOSION_STRENGTH), getConfig(this).getBoolean(DESTORY_TERRAIN));
+                            entity.addVelocity(0D, 0.5D, 0D);
                             //   entity.world.playSound(entity.posX, entity.posY, entity.posZ, SoundEvents.ENTITY_ENDERDRAGON_FLAP, SoundCategory.BLOCKS, 100.0F, 1.0F, false);
                         });
                     }

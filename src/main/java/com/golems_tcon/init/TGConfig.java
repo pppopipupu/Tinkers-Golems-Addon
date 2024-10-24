@@ -40,7 +40,12 @@ public class TGConfig {
 		GolemLookup.addConfig(EntityNetheriteGolem.class,
 				new GolemConfigSet(config, "Netherite Golem", 2000.0D, 60.0F)
 						.addKey(EntityNetheriteGolem.ALLOW_SPECIAL,true,"The Golem can make Explosion")
-						.addKey(EntityNetheriteGolem.DESTORY_TERRAIN,true,"The Golem's Explosion can Destory Terrain"));
+						.addKey(EntityNetheriteGolem.DESTORY_TERRAIN,true,"The Golem's Explosion can Destory Terrain")
+						.addKey(EntityNetheriteGolem.EXPLOSION_STRENGTH,4.5F,0.0F,20.0F,"The Golem's Explosion Strength")
+						.addKey(EntityNetheriteGolem.FIREBALL_STRENGTH,5.0F,0.0F,20.0F,"The Golem's Fireball Strength")
+		);
+
+
 
 
 		
