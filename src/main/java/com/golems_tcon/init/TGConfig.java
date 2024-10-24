@@ -42,7 +42,7 @@ public class TGConfig {
 						.addKey(EntityNetheriteGolem.ALLOW_SPECIAL,true,"The Golem can make Explosion")
 						.addKey(EntityNetheriteGolem.DESTORY_TERRAIN,true,"The Golem's Explosion can Destory Terrain")
 						.addKey(EntityNetheriteGolem.EXPLOSION_STRENGTH,4.5F,0.0F,20.0F,"The Golem's Explosion Strength")
-						.addKey(EntityNetheriteGolem.FIREBALL_STRENGTH,5.0F,0.0F,20.0F,"The Golem's Fireball Strength")
+						.addKey(EntityNetheriteGolem.FIREBALL_STRENGTH,3,0,20,"The Golem's Fireball Strength")
 		);
 
 
